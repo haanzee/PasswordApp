@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'passapp/css/main.css'%}">
+    <link rel="stylesheet" href="{% static 'passapp/css/bootstrap.css'%}">
+    <title>Document</title>
+</head>
+<body>
+  <div class="container mb-5">
+    {% include 'passapp/navbar.html' %} 
+    <div class="row">
+      <div class="col-sm-12">
+        {% block msg %} 
+        {% endblock msg %}
+      </div>
+    </div>
+    <div class="row">
+        {% block sidebar %}
+        {% endblock sidebar %}
+        {% block content %}
+        {% endblock content %}
+        {% block footer %}
+          {% include 'passapp/footer.html' %} 
+        {% endblock footer %}
+    </div>
+  </div>   
+
+<script src="{% static 'passapp/js/jquery.js' %}"></script>
+<script src="{% static 'passapp/js/popper.js' %}"></script>
+<script src="{% static 'passapp/js/all.min.js' %}"></script>
+<script src="{% static 'passapp/js/bootstrap.js' %}"></script>
+</body>
+</html>

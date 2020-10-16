@@ -1,0 +1,15 @@
+{% extends 'passapp/base.html' %}
+{% block content %}
+    
+    <div class="col-sm-8 offset-2" >
+        <h4 class="text alert alert-info">Login</h4>
+        <fieldset class="">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Login" class="btn btn-outline-primary">
+        </form>
+    </fieldset>
+    </div>
+
+{% endblock content %}

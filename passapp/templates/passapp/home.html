@@ -1,0 +1,49 @@
+{% extends 'passapp/base.html' %}
+{% block msg %}
+      {% if messages %}
+        {% for message in messages %}
+          <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %} >{{message}}</p>
+        {% endfor %}
+      {% endif %}
+{% endblock msg %}
+{% block content %}
+<div class="container">
+  {% if page_obj %}
+    {% for data in page_obj %}
+    <div class="content-section mt-3">
+    <div class="article-metadata">
+      <h5><a class="article-title" href="">{{ data.title }}</a></h5>
+      <small class="article-title">{{ data.date_posted|date:"F d, Y" }}</small>
+    </div>
+      <p class="article-content">{{ data.content }}</p>
+    </div>  
+    {% endfor %}
+  {% else %}
+    <h4> No Data </h4>
+  {% endif %}
+  <div class="row">
+      <div class="col-sm-12 align-items-center">
+        <div class="pagination">
+          <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a class="btn btn-outline-info mb-4" href="?page=1">&laquo; first</a>
+                <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+              {% if page_obj.number == num %}
+                <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+              {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">next</a>
+              <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+          </span>
+        </div>
+      </div>
+  </div>
+</div>
+{% endblock content %}

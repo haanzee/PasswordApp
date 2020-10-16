@@ -1,0 +1,28 @@
+{% extends 'passapp/base.html' %}
+{% load static %}
+{% block msg %}
+    {% if messages %}
+        {% for message in messages %}
+            <p  {% if message.tags%} class="alert alert-{{message.tags}}" mb-5 {% endif %}> {{message}} </p>
+        {% endfor %}
+    {% endif %}
+{% endblock msg %}
+{% block content %}
+    <div class="col-sm-8 offset-2" >
+        <h4 class="text alert alert-info">Login</h4>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            {% for fm in forms %}
+             <div class="form-group">
+             {{fm.label_tag}} {{fm}} <small class="text-warning">{{fm.errors|striptags}}</small>
+             </div>
+            {% endfor %}
+            <input type="submit" value="Submit" class="btn btn-primary">
+            {% if fm.non_field_errors %}
+             {% for error in fm.non_field_errors %}
+              <p class="alert alert-danger my-3">{{error}}</p>
+             {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+{% endblock content %}
